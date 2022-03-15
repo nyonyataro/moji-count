@@ -1,0 +1,13 @@
+#forms{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#nums{
+    text-align: center;
+}
+
+body{
+    margin: 40px auto;
+}
