@@ -18,7 +18,7 @@ def hello_world():
         #ファイルをアップロードされた時
         elif request.files.get('file'):
             f = request.files.get('file')
-            filepath = 'tmp/' + secure_filename(f.filename)
+            filepath = '/tmp/' + secure_filename(f.filename)
             f.save(filepath)
             
             f_2 = open(filepath,'r', encoding='UTF-8')
