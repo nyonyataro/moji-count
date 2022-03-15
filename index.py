@@ -11,7 +11,7 @@ load_dotenv()
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.urandom(24)
 app.config['MAX_CONTENT_LENGTH'] = 30 * 1024 * 1024
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://lrhhnqhwdpefuq:b449ee67154367aad5e307990cd777aa6e0f31e178f73b0b7a12034ad38125d9@ec2-3-216-221-31.compute-1.amazonaws.com:5432/d9uorpc13ahg44'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['Data_URL']
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
@@ -64,7 +64,8 @@ def hello_world():
         #ファイルをアップロードされた時
         elif request.files.get('file'):
             f = request.files.get('file')
-            filepath = '/tmp/' + secure_filename(f.filename)
+            #ローカルのときは/tmpではなくtmp
+            filepath = 'tmp/' + secure_filename(f.filename)
             f.save(filepath)
             f_2 = open(filepath,'r', encoding='UTF-8')
             txt = f_2.read()
